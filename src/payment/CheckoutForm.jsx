@@ -117,6 +117,7 @@ export default function CheckoutForm() {
   // }
 
   const handleSubmit = async (e) => {
+    const toastId = toast.loading("Please wait...")
     e.preventDefault()
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -151,14 +152,14 @@ export default function CheckoutForm() {
             }
           } else {
             dispatch(emptyShoppingDetail())
-            toast.success("transactions have been successfully completed")
+            // toast.success("transactions have been successfully completed")
+            toast.update(toastId, { render: "Transactions have been successfully completed", type: "success", isLoading: false, autoClose: true, closeButton: true });
             navigate("/");
           }
+        } else {
 
+          toast.error("Payment failed");
 
-
-          // console.log("Successful payment")
-          // setSuccess(true)
         }
       } catch (error) {
         toast.error(error.message)

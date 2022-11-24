@@ -50,7 +50,7 @@ app.post("/payment", async (req, res) => {
 		res.json({
 			message: "Payment successful",
 			success: true,
-      clientSecret: paymentIntent.client_secret,
+			clientSecret: paymentIntent.client_secret,
 		})
 	} catch (error) {
 		console.log("Error", error)
